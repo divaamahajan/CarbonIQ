@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const recommendations = ({ recommend }) => {
+const recommendations = ({ recommend , showAllRecommendations, setShowAllRecommendations}) => {
   const {
     vehicleEmissions,
     naturalGasEmission,
@@ -17,7 +17,6 @@ const recommendations = ({ recommend }) => {
     recycleMaterial,
     totalWasteReduction,
   } = recommend;
-  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
   let recommendList = [];
 
   const handleShowLessRecommendations = () => {

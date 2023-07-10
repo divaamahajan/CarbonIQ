@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../app/globals.css";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
@@ -7,6 +7,7 @@ import Overview from "@/components/Overview";
 import Recommendations from "@/components/Recommendations";
 const Results = () => {
   const router = useRouter();
+  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
   const {
     numVehicles,
     vehicleEmissions,
@@ -170,7 +171,11 @@ const Results = () => {
             className="rounded-xl border border-green-600 bg-opacity-75 bg-white p-6 ml-4"
             style={{ background: "rgba(245, 245, 245, 0.85)" }}
           >
-            <Recommendations recommend={recommend} />
+            <Recommendations
+              recommend={recommend}
+              showAllRecommendations={showAllRecommendations}
+              setShowAllRecommendations={setShowAllRecommendations}
+            />
           </div>
         </div>
         <div className="mt-4 flex justify-end">
