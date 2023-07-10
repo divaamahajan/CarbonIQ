@@ -175,7 +175,7 @@ const HomeEnergy = ({ homeEnergyData, setHomeEnergyData }) => {
               <div className="bg-gray-200 p-4 rounded-md">
                 <span className="text-xs text-gray-700">
                   <b>NOTE:</b> If you enter your monthly fuel oil use in
-                  gallons, you'll get a more accurate estimate. If you enter
+                  gallons, you&apos;ll get a more accurate estimate. If you enter
                   dollars, our calculations assume that you pay $4.02/gallon.
                   <br />
                   $72 is about average in the United States for a household of
