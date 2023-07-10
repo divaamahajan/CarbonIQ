@@ -1,5 +1,5 @@
 import HomePage from '../pages/HomePage'
-import RootLayout from '../components/layout';
+// import RootLayout from '../components/layout';
 import Header from '@/components/Header';
 
 export default function Home() {
