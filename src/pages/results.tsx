@@ -1,10 +1,8 @@
 import React from "react";
 import "../app/globals.css";
 import Header from "@/components/Header";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import CalcAgainButton from "@/components/CalcAgainButton";
-import { useSearchParams } from "next/navigation";
 import Overview from "@/components/Overview";
 import Recommendations from "@/components/Recommendations";
 const Results = () => {
