@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const recommendations = ({ recommend }) => {
   const {
@@ -195,7 +195,7 @@ const recommendations = ({ recommend }) => {
                 onClick={handleShowAllRecommendations}
                 className="text-green-700 font-inter text-16 font-semibold underline inline-flex justify-end"
               >
-                Show more recommendations...
+                Show more recommendations
               </button>
             )}
             {showAllRecommendations &&
@@ -205,7 +205,7 @@ const recommendations = ({ recommend }) => {
                 onClick={handleShowLessRecommendations}
                 className="text-green-700 font-inter text-16 font-semibold underline inline-flex text-end"
               >
-                Show less recommendations...
+                Show less recommendations
               </button>
             )}
           </ul>
