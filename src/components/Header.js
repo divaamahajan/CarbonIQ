@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -8,7 +9,7 @@ export default function Header() {
     >
       <Link href="/">
         <div className="flex items-center">
-          <img
+          <Image
             src="./images/logo.png"
             alt="CarbonIQ Logo"
             className="w-47 h-39.4 mr-2"

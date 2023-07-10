@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import "../styles/HomePage.css";
+import Image from "next/image";
 
 const HomePage = () => {
   return (
@@ -8,24 +9,24 @@ const HomePage = () => {
       <div className="justify-between">
         <div className="w-1/2">
           <div className="p-7 flex items-center pl-0">
-              <img
-                src="./images/logo.png"
-                alt="CarbonIQ Logo"
-                className="w-12 h-12 mr-2"
-                style={{ width: "92.662px", height: "76.303px" }}
-              />
-              <h1
-                style={{
-                  color: "rgba(0, 0, 0, 0.70)",
-                  fontFamily: "Prompt",
-                  fontSize: "33.668px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                }}
-              >
-                CarbonIQ
-              </h1>
+            <Image
+              src="./images/logo.png"
+              alt="CarbonIQ Logo"
+              className="w-12 h-12 mr-2"
+              style={{ width: "92.662px", height: "76.303px" }}
+            />
+            <h1
+              style={{
+                color: "rgba(0, 0, 0, 0.70)",
+                fontFamily: "Prompt",
+                fontSize: "33.668px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+              }}
+            >
+              CarbonIQ
+            </h1>
           </div>
           <h1 className="text-green-500 text-3xl font-bold mb-8">
             Welcome to CarbonIQ!
