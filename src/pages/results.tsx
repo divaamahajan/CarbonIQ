@@ -102,12 +102,15 @@ const Results = () => {
       >
         <div className="flex flex-col  justify-evenly bg-opacity-75 bg-white p-4">
           <h1 className="text-green-700 font-inter text-4xl font-bold leading-relaxed mb-4">
-            Your carbon footprint Results
+            {"Your carbon footprint Results"}
           </h1>
           <p className="font-inter text-2xl leading-relaxed">
-            <span className="text-green-700 font-bold">Congratulations!</span>{" "}
-            It's time to unveil the results of your efforts. Get ready to see
-            the impact you've made on reducing your carbon footprint.
+            <span className="text-green-700 font-bold">
+              {"Congratulations!"}
+            </span>{" "}
+            {
+              "It's time to unveil the results of your efforts. Get ready to see the impact you've made on reducing your carbon footprint."
+            }
           </p>
         </div>
 
@@ -135,13 +138,14 @@ const Results = () => {
               </svg>
             </div>
             <div className="text-green-700 font-inter text-2xl font-bold">
-              19,702 Pounds of CO2
+              {"19,702 Pounds of CO2"}
             </div>
             <div className="text-gray-700 font-inter text-lg">
-              is about average in the United States for a household of one
-              person over a year.
+              {
+                "is about average in the United States for a household of one person over a year."
+              }
               <div className="text-green-700 font-inter text-xl font-bold">
-                Your emission is {totalEmissions} Pounds of CO2
+                {"Your emission is "} {totalEmissions} {" Pounds of CO2"}
               </div>
             </div>
           </div>
