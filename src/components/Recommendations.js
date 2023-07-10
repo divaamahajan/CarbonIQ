@@ -1,11 +1,162 @@
-import React from "react";
+import React, { useState } from "react";
 
-const recommendations = ({
-  heatingSource,
-  vehicleEmissions,
-  homeEnergyEmissions,
-  wasteEmissions,
-}) => {
+const recommendations = ({ recommend }) => {
+  const {
+    vehicleEmissions,
+    naturalGasEmission,
+    fuelOilEmission,
+    propaneEmission,
+    electricityEmission,
+    wasteEmissions,
+    vehicleReduction,
+    perDegreeThermostatReduction,
+    perDegreeACReduction,
+    computerSleep,
+    perLoadLaundry,
+    perDryerLaundry,
+    perPercentGreenPower,
+    recycleMaterial,
+    totalWasteReduction,
+  } = recommend;
+  let recommendList = [];
+  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
+
+  const handleShowLessRecommendations = () => {
+    setShowAllRecommendations(false);
+  };
+  const handleShowAllRecommendations = () => {
+    setShowAllRecommendations(true);
+  };
+  const generateWordSentence = (wordList) => {
+    const length = wordList.length;
+    if (length === 0) {
+      return "";
+    } else if (length === 1) {
+      return wordList[0];
+    } else if (length === 2) {
+      return wordList.join(" and ");
+    } else {
+      const lastItem = wordList[length - 1];
+      const otherItems = wordList.slice(0, length - 1).join(", ");
+      return `${otherItems}, and ${lastItem}`;
+    }
+  };
+
+  if (vehicleEmissions <= 10484) {
+    recommendList.push(`Your annual vehicle emissions amount to ${vehicleEmissions}. 
+    Great job! This is about the average emissions per vehicle over a year in United States, 
+    which is 10,484 pounds.`);
+  } else {
+    recommendList.push(`Your annual vehicle emissions amount to ${vehicleEmissions}, 
+    which exceeds the average of 10,484 pounds per vehicle over a year in the United States. 
+    We recommend reducing your weekly mileage to lower your emissions. 
+    Additionally, you may consider switching to a vehicle with better fuel efficiency as an alternative measure.`);
+    Object.entries(vehicleReduction).forEach(([vehicle, value]) => {
+      const [reductionMilesDriven, reductionMilesPerGallon] = value;
+      let rec = `For every mile you eliminate from your weekly driving with ${vehicle}, 
+    you can reduce your annual CO2 emissions by ${reductionMilesDriven} pounds. 
+    Alternatively, increasing your vehicle's mileage per gallon by one will reduce your annual CO2 emissions by ${reductionMilesPerGallon} pounds`;
+      recommendList.push(rec);
+    });
+  }
+
+  console.log("recommendList", recommendList);
+  recommendList.push(
+    `Walking, biking, carpooling, telecommuting, and using mass transit are good options.`
+  );
+
+  // Home Energy
+  const averageNaturalGasEmission = 3071;
+  const averageFuelOilEmission = 4848;
+  const averagePropaneEmission = 2243;
+  const averageElectricityEmission = 5455;
+
+  const recommendations = [
+    {
+      emission: naturalGasEmission,
+      average: averageNaturalGasEmission,
+      type: "Natural Gas",
+    },
+    {
+      emission: fuelOilEmission,
+      average: averageFuelOilEmission,
+      type: "Fuel Oil",
+    },
+    {
+      emission: propaneEmission,
+      average: averagePropaneEmission,
+      type: "Propane",
+    },
+    {
+      emission: electricityEmission,
+      average: averageElectricityEmission,
+      type: "Electricity",
+    },
+  ];
+
+  recommendations.forEach(({ emission, average, type }) => {
+    if (emission <= average) {
+      recommendList.push(
+        `Your annual ${type} emissions amount to ${emission}. Great job! ${average} pounds is about average for a household of one person over a year.`
+      );
+    } else {
+      recommendList.push(
+        `Your annual ${type} emissions amount to ${emission}, which exceeds the average of ${average} pounds for a household of one person over a year. We recommend exploring energy-efficient options and reducing your ${type} usage.`
+      );
+    }
+
+    // Add specific recommendations for each type of emissions
+    switch (type) {
+      case "Natural Gas":
+        recommendList.push(
+          "Consider improving the insulation of your home and upgrading to an energy-efficient heating system to reduce your natural gas consumption."
+        );
+        break;
+      case "Fuel Oil":
+        recommendList.push(
+          "Explore alternative heating options such as geothermal or solar energy to decrease your reliance on fuel oil."
+        );
+        break;
+      case "Propane":
+        recommendList.push(
+          "Upgrade to energy-efficient appliances and consider using propane sparingly for optimal emission reduction."
+        );
+        break;
+      case "Electricity":
+        recommendList.push(
+          "Switch to energy-efficient lighting, appliances, and electronics to lower your electricity consumption."
+        );
+        break;
+      default:
+        break;
+    }
+  });
+
+  recommendList.push(`For every degree Fahrenheit you lower your household's heating thermostat on winter nights, 
+  you can reduce your annual CO2 emissions by ${perDegreeThermostatReduction} pounds.`);
+  recommendList.push(`For every degree Fahrenheit you raise your household's air conditioner thermostat in summer, 
+  you can reduce your annual CO2 emissions by ${perDegreeACReduction} pounds.`);
+  recommendList.push(`By enabling the sleep feature on your computer and monitor, 
+  you can reduce your annual CO2 emissions by ${computerSleep} pounds.`);
+  recommendList.push(`We recommend washing clothes in cold water instead of hot. 
+  By doing so, for each weekly load, you can reduce your annual CO2 emissions by ${perLoadLaundry} pounds.`);
+  recommendList.push(`Consider using a clothesline or drying rack for 50% of your laundry instead of relying solely on your dryer. 
+  By doing so, you can reduce your annual CO2 emissions by ${perDryerLaundry} pounds.`);
+  recommendList.push(`For every percentage point of your household's current electricity use that you substitute with green power, 
+  you can reduce your annual CO2 emissions by ${perPercentGreenPower} pounds.`);
+
+  const recycleMaterialSentence = generateWordSentence(recycleMaterial);
+  if (recycleMaterialSentence) {
+    // if (wasteEmissions <= 3071) {
+    //   recommendList.push(`Your annual Natural Gas emissions amount to ${wasteEmissions}.
+    //   Great job! 3,071 pounds is about average for a household of one person over a year.`);
+    // } else {
+    //   recommendList.push(`Your annual Natural Gas emissions  amount to ${wasteEmissions},
+    //   which exceeds the average of 3,071 pounds is about average for a household of one person over a year.`);
+    // }
+    recommendList.push(`We recommend that you start recycling ${recycleMaterialSentence}. 
+    By doing so, you can reduce your annual CO2 emissions by ${totalWasteReduction} pounds.`);
+  }
   return (
     <div>
       <div className="flex items-center">
@@ -33,8 +184,33 @@ const recommendations = ({
           Reccomandations
         </h1>
       </div>
-      <div className="flex flex-col justify-center items-center ">
-        <span className="text-green-700 font-bold">
+      <div className="flex flex-col justify-center items-center">
+        <div>
+          <ul className="list-disc">
+            {recommendList.slice(0, 5).map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+            {!showAllRecommendations && recommendList.length > 5 && (
+              <button
+                onClick={handleShowAllRecommendations}
+                className="text-green-700 font-inter text-16 font-semibold underline inline-flex justify-end"
+              >
+                Show more recommendations...
+              </button>
+            )}
+            {showAllRecommendations &&
+              recommendList.map((item) => <li key={item}>{item}</li>)}
+            {showAllRecommendations && (
+              <button
+                onClick={handleShowLessRecommendations}
+                className="text-green-700 font-inter text-16 font-semibold underline inline-flex text-end"
+              >
+                Show less recommendations...
+              </button>
+            )}
+          </ul>
+        </div>
+        <span className="text-green-700 font-bold mt-10">
           Thank you for making a positive impact on the environment!
         </span>
       </div>

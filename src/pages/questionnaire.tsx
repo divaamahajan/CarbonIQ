@@ -8,7 +8,7 @@ import "../app/globals.css";
 import Header from "@/components/Header";
 import PrevButton from "@/components/PrevButton";
 import NextButton from "@/components/NextButton";
-import { calculateEmissions } from "@/utils/utils";
+import { calculateEmissions, totalReduction } from "@/utils/utils";
 
 const QuestionnairePage = () => {
   interface HouseholdVehiclesData {
@@ -99,21 +99,24 @@ const QuestionnairePage = () => {
       return;
     }
     setAlert("");
-    console.log("basicData", basicData);
-    console.log("householdVehiclesData", householdVehiclesData);
-    console.log("homeEnergyData", homeEnergyData);
-    console.log("wasteRecycleData", wasteRecycleData);
     const emissions = calculateEmissions(
       householdVehiclesData,
       homeEnergyData,
       basicData,
       wasteRecycleData
     );
-    console.log("emissions", emissions);
+    const reductions = totalReduction(
+      householdVehiclesData,
+      homeEnergyData,
+      basicData,
+      wasteRecycleData
+    );
+    console.log("reductions", reductions);
+    const queryData = { ...emissions, ...reductions };
     // Redirect to the result page with the questionnaire data
     router.push({
       pathname: "/results",
-      query: emissions,
+      query: queryData,
     });
   };
 

@@ -10,10 +10,21 @@ import Recommendations from "@/components/Recommendations";
 const Results = () => {
   const router = useRouter();
   const {
-    heatingSource,
+    numVehicles,
     vehicleEmissions,
-    homeEnergyEmissions,
+    naturalGasEmission,
+    fuelOilEmission,
+    propaneEmission,
+    electricityEmission,
     wasteEmissions,
+    perDegreeThermostatReduction,
+    perDegreeACReduction,
+    computerSleep,
+    perLoadLaundry,
+    perDryerLaundry,
+    perPercentGreenPower,
+    recycleMaterial,
+    totalWasteReduction,
   } = router.query; // Access the emissions query parameter
 
   const handleQuestionPage = () => {
@@ -22,17 +33,59 @@ const Results = () => {
     });
   };
 
-  console.log(
-    "router",
-    heatingSource,
+  let vehicleReduction: Record<string, string[]> = {};
+  const count = Number(numVehicles) || 0;
+
+  if (count > 0) {
+    for (let i = 0; i < count; i++) {
+      const vehicleKey = `Vehicle${i}`;
+      if (router.query.hasOwnProperty(vehicleKey)) {
+        const value = router.query[vehicleKey];
+        if (Array.isArray(value)) {
+          vehicleReduction[vehicleKey] = value;
+        }
+      }
+    }
+  }
+
+  // console.log("numVehicles:", numVehicles);
+  // console.log("vehicleEmissions:", vehicleEmissions);
+  // console.log("homeEnergyEmissions:", homeEnergyEmissions);
+  // console.log("wasteEmissions:", wasteEmissions);
+  // console.log("vehicleReduction", vehicleReduction)
+  // console.log("perDegreeThermostatReduction:", perDegreeThermostatReduction);
+  // console.log("perDegreeACReduction:", perDegreeACReduction);
+  // console.log("computerSleep:", computerSleep);
+  // console.log("perLoadLaundry:", perLoadLaundry);
+  // console.log("perDryerLaundry:", perDryerLaundry);
+  // console.log("perPercentGreenPower:", perPercentGreenPower);
+  // console.log("recycleMaterial:", recycleMaterial);
+  // console.log("totalWasteReduction:", totalWasteReduction);
+
+  const recommend = {
     vehicleEmissions,
-    homeEnergyEmissions,
-    wasteEmissions
-  );
+    naturalGasEmission,
+    fuelOilEmission,
+    propaneEmission,
+    electricityEmission,
+    wasteEmissions,
+    vehicleReduction,
+    perDegreeThermostatReduction,
+    perDegreeACReduction,
+    computerSleep,
+    perLoadLaundry,
+    perDryerLaundry,
+    perPercentGreenPower,
+    recycleMaterial,
+    totalWasteReduction,
+  };
 
   const totalEmissions = (
     (parseFloat(vehicleEmissions as string) || 0) +
-    (parseFloat(homeEnergyEmissions as string) || 0) +
+    (parseFloat(naturalGasEmission as string) || 0) +
+    (parseFloat(fuelOilEmission as string) || 0) +
+    (parseFloat(propaneEmission as string) || 0) +
+    (parseFloat(electricityEmission as string) || 0) +
     (parseFloat(wasteEmissions as string) || 0)
   ).toFixed(2);
 
@@ -84,11 +137,14 @@ const Results = () => {
               </svg>
             </div>
             <div className="text-green-700 font-inter text-2xl font-bold">
-              {totalEmissions} Pounds of CO2
+              19,702 Pounds of CO2
             </div>
             <div className="text-gray-700 font-inter text-lg">
               is about average in the United States for a household of one
-              person over a year
+              person over a year.
+              <div className="text-green-700 font-inter text-xl font-bold">
+                Your emission is {totalEmissions} Pounds of CO2
+              </div>
             </div>
           </div>
         </div>
@@ -100,21 +156,19 @@ const Results = () => {
             <Overview
               emissions={{
                 vehicleEmissions,
-                homeEnergyEmissions,
+                naturalGasEmission,
+                fuelOilEmission,
+                propaneEmission,
+                electricityEmission,
                 wasteEmissions,
               }}
-            />            
+            />
           </div>
           <div
             className="rounded-xl border border-green-600 bg-opacity-75 bg-white p-6 ml-4"
             style={{ background: "rgba(245, 245, 245, 0.85)" }}
           >
-            <Recommendations
-              heatingSource={heatingSource}
-              vehicleEmissions={vehicleEmissions}
-              homeEnergyEmissions={homeEnergyEmissions}
-              wasteEmissions={wasteEmissions}
-            />
+            <Recommendations recommend={recommend} />
           </div>
         </div>
         <div className="mt-4 flex justify-end">
