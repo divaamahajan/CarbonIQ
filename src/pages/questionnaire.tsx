@@ -155,9 +155,11 @@ const QuestionnairePage = () => {
         {step === 1 && (
           <div className="flex flex-col justify-evenly bg-opacity-75 bg-white p-4">
             <h1 className="text-green-700 font-inter text-4xl font-bold mb-8">
-              Let&apos;s get started!
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              Let's get started!
             </h1>
             <p className="font-inter text-2xl leading-relaxed">
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
               Ready to make a difference?
               <br />
               Answer a few questions to understand your environmental footprint
