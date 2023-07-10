@@ -152,45 +152,56 @@ const HomeEnergy = ({ homeEnergyData, setHomeEnergyData }) => {
             {question.id === "naturalGasAmt" && (
               <div className="bg-gray-200 p-4 rounded-md">
                 <span className="text-xs text-gray-700">
-                  <b>NOTE:</b> If you enter dollars, our calculations assume you
-                  pay $10.68/thousand cubic feet.
+                  <b>{"NOTE:"}</b>{" "}
+                  {
+                    "If you enter dollars, our calculations assume you pay $10.68/thousand cubic feet."
+                  }
                   <br />
-                  $23 is about average in the United States for a household of
-                  one person.
+                  {
+                    "$23 is about average in the United States for a household of one person."
+                  }
                 </span>
               </div>
             )}
             {question.id === "electricity" && (
               <div className="bg-gray-200 p-4 rounded-md">
                 <span className="text-xs text-gray-700">
-                  <b>NOTE:</b> If you enter dollars, our calculations assume
-                  that you pay 11.9 cents/kWh.
+                  <b>{"NOTE:"}</b>{" "}
+                  {
+                    "If you enter dollars, our calculations assume that you pay 11.9 cents/kWh."
+                  }
                   <br />
-                  $44 is about average in the United States for a household of
-                  one person.
+                  {
+                    "$44 is about average in the United States for a household of one person."
+                  }
                 </span>
               </div>
             )}
             {question.id === "fuelOil" && (
               <div className="bg-gray-200 p-4 rounded-md">
                 <span className="text-xs text-gray-700">
-                  <b>NOTE:</b> If you enter your monthly fuel oil use in
-                  gallons, you&apos;ll get a more accurate estimate. If you enter
-                  dollars, our calculations assume that you pay $4.02/gallon.
+                  <b>{"NOTE:"}</b>{" "}
+                  {
+                    "If you enter your monthly fuel oil use in gallons, you'll get a more accurate estimate. If you enter dollars, our calculations assume that you pay $4.02/gallon."
+                  }
                   <br />
-                  $72 is about average in the United States for a household of
-                  one person.
+                  {
+                    "$72 is about average in the United States for a household of one person."
+                  }
                 </span>
               </div>
             )}
             {question.id === "propaneAmt" && (
               <div className="bg-gray-200 p-4 rounded-md">
                 <span className="text-xs text-gray-700">
-                  <b>NOTE:</b> If you enter dollars, our calculations assume
-                  that you pay $2.47/gallon.
+                  <b>{"NOTE:"}</b>{" "}
+                  {
+                    "If you enter dollars, our calculations assume that you pay $2.47/gallon."
+                  }
                   <br />
-                  $37 is about average in the United States for a household of
-                  one person.
+                  {
+                    "$37 is about average in the United States for a household of one person."
+                  }
                 </span>
               </div>
             )}
