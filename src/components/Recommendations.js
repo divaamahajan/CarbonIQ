@@ -7,7 +7,6 @@ const recommendations = ({ recommend }) => {
     fuelOilEmission,
     propaneEmission,
     electricityEmission,
-    wasteEmissions,
     vehicleReduction,
     perDegreeThermostatReduction,
     perDegreeACReduction,
@@ -18,8 +17,8 @@ const recommendations = ({ recommend }) => {
     recycleMaterial,
     totalWasteReduction,
   } = recommend;
-  let recommendList = [];
   const [showAllRecommendations, setShowAllRecommendations] = useState(false);
+  let recommendList = [];
 
   const handleShowLessRecommendations = () => {
     setShowAllRecommendations(false);
@@ -27,6 +26,7 @@ const recommendations = ({ recommend }) => {
   const handleShowAllRecommendations = () => {
     setShowAllRecommendations(true);
   };
+
   const generateWordSentence = (wordList) => {
     const length = wordList.length;
     if (length === 0) {
