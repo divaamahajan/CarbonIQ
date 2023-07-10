@@ -27,8 +27,11 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
   };
 
   const generateWordSentence = (wordList) => {
+    if (!Array.isArray(wordList)) {
+      return "";
+    }
     const length = wordList.length;
-    if (length === 0) {
+    if (length === 0) { 
       return "";
     } else if (length === 1) {
       return wordList[0];
