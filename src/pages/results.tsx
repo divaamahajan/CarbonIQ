@@ -109,8 +109,10 @@ const Results = () => {
             <span className="text-green-900 font-bold">
               {"Congratulations!"}
             </span>{" "}
+            {"It's time to unveil the results of your efforts."}
+            <br />
             {
-              "It's time to unveil the results of your efforts. Get ready to see the impact you've made on reducing your carbon footprint."
+              "Get ready to see the impact you've made on reducing your carbon footprint."
             }
           </p>
         </div>
@@ -119,7 +121,7 @@ const Results = () => {
           className="rounded-xl flex flex-col justify-evenly items-center border border-green-600 bg-opacity-75 bg-white p-6 mb-4"
           style={{ background: "rgba(245, 245, 245, 0.85)" }}
         >
-          <div className="flex justify-evenly items-center">
+          <div className="flex justify-evenly items-center space-x-8">
             <div className="text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -138,16 +140,24 @@ const Results = () => {
                 />
               </svg>
             </div>
-            <div className="text-green-900 font-inter text-2xl font-bold">
-              {"19,702 Pounds of CO2"}
-            </div>
-            <div className="text-gray-700 font-inter text-lg">
-              {
-                "is about average in the United States for a household of one person over a year."
-              }
-              <div className="text-green-900 font-inter text-xl font-bold">
-                {"Your emission is "} {totalEmissions} {" Pounds of CO2"}
+            <div>
+              <div className="text-green-900 font-inter text-xl font-semibold">
+                {"Your total annual emissions are"}
               </div>
+              <div className="text-green-900 font-inter text-2xl font-bold">
+                {parseInt(totalEmissions).toLocaleString()}
+                {" Pounds of CO2."}
+              </div>
+            </div>
+            <div className="text-green-900 font-inter text-lg font-semibold flex items-center">
+              {parseInt(totalEmissions) <= 19702
+                ? "This is about average of"
+                : "This is more than average of"}
+              <div className="font-bold ml-1">{"19,702 Pounds of CO2"}</div>
+              <div>&nbsp;</div>
+              {
+                "in the United States for a household of one person over a year."
+              }
             </div>
           </div>
         </div>
