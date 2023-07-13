@@ -5,15 +5,25 @@ import { Pie } from "react-chartjs-2";
 import randomColor from "randomcolor";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-// Function to generate vibrant colors
 const generateColors = (count) => {
-  return randomColor({
-    count: count,
-    // hue: "blue",
-    luminosity: "light",
-    format: "rgb",
-  });
+  const uniqueColors = new Set();
+  const colors = [];
+
+  while (colors.length < count) {
+    const color = randomColor({
+      luminosity: "bright",
+      format: "rgb",
+    });
+
+    if (!uniqueColors.has(color)) {
+      uniqueColors.add(color);
+      colors.push(color);
+    }
+  }
+
+  return colors;
 };
+
 
 const Overview = ({ emissions }) => {
   const labels = Object.keys(emissions);
@@ -27,7 +37,7 @@ const Overview = ({ emissions }) => {
         label: "Pounds of CO2 Emission",
         data: dataset,
         backgroundColor: colors,
-        borderColor: "rgba(255, 255, 255, 0.5)",
+        borderColor: "rgba(255, 255, 255)",
         borderWidth: 3,
       },
     ],
@@ -68,7 +78,7 @@ const Overview = ({ emissions }) => {
           Overview
         </span>
       </div>
-      <div style={{ width: "100%", height: "auto" }}>
+      <div style={{ width: "110%", height: "auto" }}>
         <Pie data={data} />
       </div>
     </div>

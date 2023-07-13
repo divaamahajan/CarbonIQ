@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const recommendations = ({ recommend , showAllRecommendations, setShowAllRecommendations}) => {
+const recommendations = ({
+  recommend,
+  showAllRecommendations,
+  setShowAllRecommendations,
+}) => {
   const {
     vehicleEmissions,
     naturalGasEmission,
@@ -31,7 +35,7 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
       return "";
     }
     const length = wordList.length;
-    if (length === 0) { 
+    if (length === 0) {
       return "";
     } else if (length === 1) {
       return wordList[0];
@@ -43,29 +47,44 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
       return `${otherItems}, and ${lastItem}`;
     }
   };
+  // Recycle
+  const recycleMaterialSentence = generateWordSentence(recycleMaterial);
+  if (recycleMaterialSentence) {
+    recommendList.push(`We recommend that you start recycling ${recycleMaterialSentence}. 
+  By doing so, you can reduce your annual CO2 emissions by ${Number(
+    totalWasteReduction
+  ).toFixed(2)} pounds.`);
+  }
 
+  // Vehicle
   if (vehicleEmissions <= 10484) {
-    recommendList.push(`Your annual vehicle emissions amount to ${Number(vehicleEmissions).toFixed(2)} pounds. 
+    recommendList.push(`Your annual vehicle emissions amount to ${Number(
+      vehicleEmissions
+    ).toFixed(2)} pounds. 
     Great job! This is about the average emissions per vehicle over a year in United States, 
     which is 10,484 pounds.`);
   } else {
-    recommendList.push(`Your annual vehicle emissions amount to ${Number(vehicleEmissions).toFixed(2)} pounds, 
+    recommendList.push(`Your annual vehicle emissions amount to ${Number(
+      vehicleEmissions
+    ).toFixed(2)} pounds, 
     which exceeds the average of 10,484 pounds per vehicle over a year in the United States. 
     We recommend reducing your weekly mileage to lower your emissions. 
     Additionally, you may consider switching to a vehicle with better fuel efficiency as an alternative measure.`);
     Object.entries(vehicleReduction).forEach(([vehicle, value]) => {
       const [reductionMilesDriven, reductionMilesPerGallon] = value;
       let rec = `For every mile you eliminate from your weekly driving with ${vehicle}, 
-    you can reduce your annual CO2 emissions by ${Number(reductionMilesDriven).toFixed(2)}} pounds. 
+    you can reduce your annual CO2 emissions by ${Number(
+      reductionMilesDriven
+    ).toFixed(2)}} pounds. 
     Alternatively, increasing your vehicle's mileage per gallon by one will reduce your annual CO2 emissions by ${reductionMilesPerGallon} pounds`;
       recommendList.push(rec);
     });
-  }
 
-  console.log("recommendList", recommendList);
-  recommendList.push(
-    `Walking, biking, carpooling, telecommuting, and using mass transit are good options.`
-  );
+    console.log("recommendList", recommendList);
+    recommendList.push(
+      `Walking, biking, carpooling, telecommuting, and using mass transit are good options.`
+    );
+  }
 
   // Home Energy
   const averageNaturalGasEmission = 3071;
@@ -134,24 +153,32 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
     }
   });
 
+  // Genral
   recommendList.push(`For every degree Fahrenheit you lower your household's heating thermostat on winter nights, 
-  you can reduce your annual CO2 emissions by ${Number(perDegreeThermostatReduction).toFixed(2)} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(
+    perDegreeThermostatReduction
+  ).toFixed(2)} pounds.`);
   recommendList.push(`For every degree Fahrenheit you raise your household's air conditioner thermostat in summer, 
-  you can reduce your annual CO2 emissions by ${Number(perDegreeACReduction).toFixed(2)} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(
+    perDegreeACReduction
+  ).toFixed(2)} pounds.`);
   recommendList.push(`By enabling the sleep feature on your computer and monitor, 
-  you can reduce your annual CO2 emissions by ${Number(computerSleep).toFixed(2)} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(computerSleep).toFixed(
+    2
+  )} pounds.`);
   recommendList.push(`We recommend washing clothes in cold water instead of hot. 
-  By doing so, for each weekly load, you can reduce your annual CO2 emissions by ${Number(perLoadLaundry).toFixed(2)} pounds.`);
+  By doing so, for each weekly load, you can reduce your annual CO2 emissions by ${Number(
+    perLoadLaundry
+  ).toFixed(2)} pounds.`);
   recommendList.push(`Consider using a clothesline or drying rack for 50% of your laundry instead of relying solely on your dryer. 
-  By doing so, you can reduce your annual CO2 emissions by ${Number(perDryerLaundry).toFixed(2)} pounds.`);
+  By doing so, you can reduce your annual CO2 emissions by ${Number(
+    perDryerLaundry
+  ).toFixed(2)} pounds.`);
   recommendList.push(`For every percentage point of your household's current electricity use that you substitute with green power, 
-  you can reduce your annual CO2 emissions by ${Number(perPercentGreenPower).toFixed(2)} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(
+    perPercentGreenPower
+  ).toFixed(2)} pounds.`);
 
-  const recycleMaterialSentence = generateWordSentence(recycleMaterial);
-  if (recycleMaterialSentence) {
-    recommendList.push(`We recommend that you start recycling ${recycleMaterialSentence}. 
-    By doing so, you can reduce your annual CO2 emissions by ${Number(totalWasteReduction).toFixed(2)} pounds.`);
-  }
   return (
     <div>
       <div className="flex items-center">
@@ -179,34 +206,35 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
           Reccomandations
         </h1>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <div>
-          <ul className="list-disc">
-            {recommendList.slice(0, 5).map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-            {!showAllRecommendations && recommendList.length > 5 && (
-              <button
-                onClick={handleShowAllRecommendations}
-                className="text-green-900 font-inter text-16 font-semibold underline inline-flex justify-end"
-              >
-                Show more recommendations
-              </button>
-            )}
-            {showAllRecommendations &&
-              recommendList.map((item) => <li key={item}>{item}</li>)}
-            {showAllRecommendations && (
-              <button
-                onClick={handleShowLessRecommendations}
-                className="text-green-900 font-inter text-16 font-semibold underline inline-flex text-end"
-              >
-                Show less recommendations
-              </button>
-            )}
-          </ul>
+      <div className="flex flex-col justify-center">
+        <ul className="list-disc text-justify">
+          {recommendList.slice(0, 7).map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+          {showAllRecommendations &&
+            recommendList.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+
+        <div className="flex justify-end items-center mt-4">
+          {!showAllRecommendations && recommendList.length > 5 && (
+            <button
+              onClick={handleShowAllRecommendations}
+              className="text-green-900 font-inter text-16 font-semibold underline inline-flex justify-end"
+            >
+              Show more recommendations
+            </button>
+          )}
+          {showAllRecommendations && (
+            <button
+              onClick={handleShowLessRecommendations}
+              className="text-green-900 font-inter text-16 font-semibold underline inline-flex text-end"
+            >
+              Show less recommendations
+            </button>
+          )}
         </div>
-        <span className="text-green-900 font-bold mt-10">
-          Thank you for making a positive impact on the environment!
+        <span className="text-green-900 font-bold mt-6  text-center">
+          {"Thank you for making a positive impact on the environment!"}
         </span>
       </div>
     </div>
