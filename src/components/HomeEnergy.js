@@ -21,7 +21,7 @@ const HomeEnergy = ({ homeEnergyData, setHomeEnergyData }) => {
         >
           <path
             d="M12 21H3.6V11.4H0L12 0.599976L15.336 3.59998H14.4V5.60398C13.008 6.09598 12 7.43998 12 8.99998V21ZM15.6 7.79998H16.8V5.99998H21.6V7.79998H22.8C23.46 7.79998 24 8.33997 24 8.99998V22.2C24 22.86 23.46 23.4 22.8 23.4H15.6C14.94 23.4 14.4 22.86 14.4 22.2V8.99998C14.4 8.33997 14.94 7.79998 15.6 7.79998ZM16.8 10.2V13.8H21.6V10.2H16.8Z"
-            fill="#0FA958"
+            fill="darkgreen"
           />
         </svg>
         <span className="ml-2 text-green-700 font-semibold text-3xl leading-tight my-3">
@@ -33,13 +33,13 @@ const HomeEnergy = ({ homeEnergyData, setHomeEnergyData }) => {
           <div key={question.id} className="mb-4">
             <div className="mb-4">
               {/* Question */}
-              <label htmlFor={question.id} className="text-lg font-semibold">
+              <label htmlFor={question.id} className="text-lg font-normal">
                 {question.label}
               </label>
               <div className="flex items-center">
                 {/* Answer */}
                 {question.type === "number" && (
-                  <div className="flex items-center ml-2">
+                  <div className="flex items-center">
                     <input
                       type={question.type}
                       id={question.id}

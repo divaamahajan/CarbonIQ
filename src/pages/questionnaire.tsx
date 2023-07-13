@@ -154,7 +154,7 @@ const QuestionnairePage = () => {
       >
         {step === 1 && (
           <div className="flex flex-col justify-evenly bg-opacity-75 bg-white p-4">
-            <h1 className="text-green-700 font-inter text-4xl font-bold mb-8">
+            <h1 className="text-green-900 font-inter text-4xl font-bold mb-8">
               {/* eslint-disable-next-line react/no-unescaped-entities */}
               Let's get started!
             </h1>
