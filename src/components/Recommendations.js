@@ -45,18 +45,18 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
   };
 
   if (vehicleEmissions <= 10484) {
-    recommendList.push(`Your annual vehicle emissions amount to ${vehicleEmissions}. 
+    recommendList.push(`Your annual vehicle emissions amount to ${Number(vehicleEmissions).toFixed(2)} pounds. 
     Great job! This is about the average emissions per vehicle over a year in United States, 
     which is 10,484 pounds.`);
   } else {
-    recommendList.push(`Your annual vehicle emissions amount to ${vehicleEmissions}, 
+    recommendList.push(`Your annual vehicle emissions amount to ${Number(vehicleEmissions).toFixed(2)} pounds, 
     which exceeds the average of 10,484 pounds per vehicle over a year in the United States. 
     We recommend reducing your weekly mileage to lower your emissions. 
     Additionally, you may consider switching to a vehicle with better fuel efficiency as an alternative measure.`);
     Object.entries(vehicleReduction).forEach(([vehicle, value]) => {
       const [reductionMilesDriven, reductionMilesPerGallon] = value;
       let rec = `For every mile you eliminate from your weekly driving with ${vehicle}, 
-    you can reduce your annual CO2 emissions by ${reductionMilesDriven} pounds. 
+    you can reduce your annual CO2 emissions by ${Number(reductionMilesDriven).toFixed(2)}} pounds. 
     Alternatively, increasing your vehicle's mileage per gallon by one will reduce your annual CO2 emissions by ${reductionMilesPerGallon} pounds`;
       recommendList.push(rec);
     });
@@ -75,22 +75,22 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
 
   const recommendations = [
     {
-      emission: naturalGasEmission,
+      emission: Number(naturalGasEmission).toFixed(2),
       average: averageNaturalGasEmission,
       type: "Natural Gas",
     },
     {
-      emission: fuelOilEmission,
+      emission: Number(fuelOilEmission).toFixed(2),
       average: averageFuelOilEmission,
       type: "Fuel Oil",
     },
     {
-      emission: propaneEmission,
+      emission: Number(propaneEmission).toFixed(2),
       average: averagePropaneEmission,
       type: "Propane",
     },
     {
-      emission: electricityEmission,
+      emission: Number(electricityEmission).toFixed(2),
       average: averageElectricityEmission,
       type: "Electricity",
     },
@@ -99,11 +99,11 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
   recommendations.forEach(({ emission, average, type }) => {
     if (emission <= average) {
       recommendList.push(
-        `Your annual ${type} emissions amount to ${emission}. Great job! ${average} pounds is about average for a household of one person over a year.`
+        `Your annual ${type} emissions amount to ${emission} pounds. Great job! ${average} pounds is about average for a household of one person over a year.`
       );
     } else {
       recommendList.push(
-        `Your annual ${type} emissions amount to ${emission}, which exceeds the average of ${average} pounds for a household of one person over a year. We recommend exploring energy-efficient options and reducing your ${type} usage.`
+        `Your annual ${type} emissions amount to ${emission} pounds, which exceeds the average of ${average} pounds for a household of one person over a year. We recommend exploring energy-efficient options and reducing your ${type} usage.`
       );
     }
 
@@ -135,29 +135,22 @@ const recommendations = ({ recommend , showAllRecommendations, setShowAllRecomme
   });
 
   recommendList.push(`For every degree Fahrenheit you lower your household's heating thermostat on winter nights, 
-  you can reduce your annual CO2 emissions by ${perDegreeThermostatReduction} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(perDegreeThermostatReduction).toFixed(2)} pounds.`);
   recommendList.push(`For every degree Fahrenheit you raise your household's air conditioner thermostat in summer, 
-  you can reduce your annual CO2 emissions by ${perDegreeACReduction} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(perDegreeACReduction).toFixed(2)} pounds.`);
   recommendList.push(`By enabling the sleep feature on your computer and monitor, 
-  you can reduce your annual CO2 emissions by ${computerSleep} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(computerSleep).toFixed(2)} pounds.`);
   recommendList.push(`We recommend washing clothes in cold water instead of hot. 
-  By doing so, for each weekly load, you can reduce your annual CO2 emissions by ${perLoadLaundry} pounds.`);
+  By doing so, for each weekly load, you can reduce your annual CO2 emissions by ${Number(perLoadLaundry).toFixed(2)} pounds.`);
   recommendList.push(`Consider using a clothesline or drying rack for 50% of your laundry instead of relying solely on your dryer. 
-  By doing so, you can reduce your annual CO2 emissions by ${perDryerLaundry} pounds.`);
+  By doing so, you can reduce your annual CO2 emissions by ${Number(perDryerLaundry).toFixed(2)} pounds.`);
   recommendList.push(`For every percentage point of your household's current electricity use that you substitute with green power, 
-  you can reduce your annual CO2 emissions by ${perPercentGreenPower} pounds.`);
+  you can reduce your annual CO2 emissions by ${Number(perPercentGreenPower).toFixed(2)} pounds.`);
 
   const recycleMaterialSentence = generateWordSentence(recycleMaterial);
   if (recycleMaterialSentence) {
-    // if (wasteEmissions <= 3071) {
-    //   recommendList.push(`Your annual Natural Gas emissions amount to ${wasteEmissions}.
-    //   Great job! 3,071 pounds is about average for a household of one person over a year.`);
-    // } else {
-    //   recommendList.push(`Your annual Natural Gas emissions  amount to ${wasteEmissions},
-    //   which exceeds the average of 3,071 pounds is about average for a household of one person over a year.`);
-    // }
     recommendList.push(`We recommend that you start recycling ${recycleMaterialSentence}. 
-    By doing so, you can reduce your annual CO2 emissions by ${totalWasteReduction} pounds.`);
+    By doing so, you can reduce your annual CO2 emissions by ${Number(totalWasteReduction).toFixed(2)} pounds.`);
   }
   return (
     <div>
